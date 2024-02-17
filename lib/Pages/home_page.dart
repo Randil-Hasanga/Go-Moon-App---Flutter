@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_moon/widgets/custom_dropdown_button.dart';
 
 class HomePage extends StatelessWidget {
   late double _deviceHeight, _deviceWidth;
@@ -22,7 +23,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _pageTitle(),
-              _destinationDropDownMenu(),
+              _bookRideWidget(),
             ],
           ),
         ),
@@ -53,25 +54,76 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _destinationDropDownMenu() {
-    List<String> _items = [
-      'Gammudawa web station',
-      'Matara web station',
-    ];
+    return CustomDropdownButtonClass(
+      values: const [
+        'Gammudawa web station',
+        'Matara web station',
+      ],
+      width: _deviceWidth,
+    );
+  }
+
+  Widget _travellerInformationWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomDropdownButtonClass(
+          values: const [
+            '1',
+            '2',
+            '3',
+            '4',
+          ],
+          width: _deviceWidth * 0.45,
+        ),
+        CustomDropdownButtonClass(
+          values: const [
+            'Economy',
+            'Business',
+            'First',
+            'Private',
+          ],
+          width: _deviceWidth * 0.40,
+        ),
+      ],
+    );
+  }
+
+  Widget _bookRideWidget() {
     return Container(
-      child: DropdownButton(
-        value: _items.first,
-        onChanged: (_) {},
-        items: _items.map(
-          (e) {
-            return DropdownMenuItem(
-              child: Text(e),
-              value: e,
-            );
-          },
-        ).toList(),
-        underline: Container(),
-        dropdownColor: const Color.fromRGBO(53, 53, 53, 1.0),
-        style: const TextStyle(color: Colors.white),
+      //color: Colors.red,
+      height: _deviceHeight * 0.25,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _destinationDropDownMenu(),
+          _travellerInformationWidget(),
+          _rideButton(),
+        ],
+      ),
+    );
+  }
+
+  Widget _rideButton() {
+    return Container(
+      margin: EdgeInsets.only(bottom: _deviceHeight*0.01),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      width: _deviceWidth,
+      child: MaterialButton(
+        onPressed: () {},
+        child: const Text(
+          "Book Ride",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
       ),
     );
   }
