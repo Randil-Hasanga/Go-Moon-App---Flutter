@@ -17,13 +17,21 @@ class HomePage extends StatelessWidget {
           height: _deviceHeight,
           padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.05),
           // color: Colors.red,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              _pageTitle(),
-              _bookRideWidget(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _pageTitle(),
+                  _bookRideWidget(),
+                ],
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: _astroImage(),
+              ),
             ],
           ),
         ),
@@ -44,6 +52,8 @@ class HomePage extends StatelessWidget {
 
   Widget _astroImage() {
     return Container(
+      height: _deviceHeight * 0.5,
+      width: _deviceWidth * 0.65,
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.contain,
@@ -110,7 +120,7 @@ class HomePage extends StatelessWidget {
 
   Widget _rideButton() {
     return Container(
-      margin: EdgeInsets.only(bottom: _deviceHeight*0.01),
+      margin: EdgeInsets.only(bottom: _deviceHeight * 0.01),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
